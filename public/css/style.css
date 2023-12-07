@@ -182,5 +182,17 @@ button, input[type="submit"] {
     color: #333;
   }
   
+/* CSS for the container holding both col-6 containers */
+.row.mt-5 {
+    display: flex; /* Use flexbox */
+    justify-content: space-between; /* Space evenly between col-6 containers */
+}
+
+/* CSS for the col-6 containers */
+.col-6 {
+    flex: 0 0 calc(50% - 10px); /* Calculate 50% width minus any margin or padding */
+    box-sizing: border-box; /* Include padding and border in the width */
+    padding: 10px; /* Adjust as needed */
+}
 
 

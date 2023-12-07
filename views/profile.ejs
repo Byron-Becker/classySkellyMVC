@@ -1,32 +1,26 @@
 <%- include('partials/header') -%>
+<!-- main container with objective measurements and outcome container -->
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6">
-
+    <div class="col-6">
+      <div class="mt-5">
+          <form action="/measurement/createMeasurement"  method="POST">
+                         
+<!-- ropdown for selecting the exercise series -->
+                  <select id="exerciseSeries" name="exerciseSeries" onchange="updateExercises()">
+                      <option value="" selected disabled>Select Series</option>
+                      <option value="flexion">Flexion</option>
+                      <option value="extension">Extension</option>
+                      <option value="lateral">Lateral</option>
+                      <option value="lateral-rotation">Lateral-Rotation</option>
+                  </select>
           
-
-          <div class="mt-5">
-            
-            <form action="/measurement/createMeasurement"  method="POST">
-                           
-<!-- Dropdown for selecting the exercise series -->
-                    <select id="exerciseSeries" name="exerciseSeries" onchange="updateExercises()">
-                        <option value="" selected disabled>Select Series</option>
-                        <option value="flexion">Flexion</option>
-                        <option value="extension">Extension</option>
-                        <option value="lateral">Lateral</option>
-                        <option value="lateral-rotation">Lateral-Rotation</option>
-                    </select>
-            
- <!-- Dropdown for specific exercises, to be filled dynamically -->
-                    <select id="specificExercise" name="exerciseGiven" required></select>
-
-
-                <input type="text" name="patient_Id" required placeholder="Enter Patient ID">
-                <input type="submit" value="Objective measurements">
-
- <!-- Objective Measurement Table --> 
-                <table>
+ <!--Dropdown for specific exercises, to be filled dynamically -->
+                  <select id="specificExercise" name="exerciseGiven" required></select>
+              <input type="text" name="patient_Id" required placeholder="Enter Patient ID">
+              <input type="submit" value="Submit Data">
+ <!--Objective Measurement Table --> 
+              <table>
                     <thead>
                         <tr>
                             <th></th>
@@ -76,10 +70,10 @@
                             <td><textarea name="notes[]"></textarea></td>
                         </tr>
                     </tbody>
-                </table>
-              </form>
-        </div>
+              </table>
+            </form>
       </div>
+    </div>
      
 <!-- Outcome container - right of Measurement Table -->
       <div class="col-6">
@@ -90,7 +84,7 @@
           </div>
         <% } %>
       </div>
-      </div>
+  </div>
     
 <!-- login email/user and logout button -->
       <div class="footer user-details">
@@ -99,12 +93,7 @@
         <a href="/logout" class="btn btn-primary">Logout</a>
     </div>
         
-    </div>
-  </div>
 </div>
-
-
-
 
 <script src="/scripts/scripts.js"></script>
 
