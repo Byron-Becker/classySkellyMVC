@@ -7,13 +7,15 @@
           <form action="/measurement/createMeasurement"  method="POST">
                          
 <!-- ropdown for selecting the exercise series -->
-                  <select id="exerciseSeries" name="exerciseSeries" onchange="updateExercises()">
-                      <option value="" selected disabled>Select Series</option>
-                      <option value="flexion">Flexion</option>
-                      <option value="extension">Extension</option>
-                      <option value="lateral">Lateral</option>
-                      <option value="lateral-rotation">Lateral-Rotation</option>
-                  </select>
+              <select id="exerciseSeries" name="exerciseSeries" onchange="updateExercises()">
+                <option value="" selected disabled>Select Series</option>
+                <option value="initial">Initial Assessment</option>
+                <option value="flexion">Flexion</option>
+                <option value="extension">Extension</option>
+                <option value="lateral">Lateral</option>
+                <option value="lateral-rotation">Lateral-Rotation</option>
+              </select>
+
           
  <!--Dropdown for specific exercises, to be filled dynamically -->
                   <select id="specificExercise" name="exerciseGiven" required></select>

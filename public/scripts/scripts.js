@@ -8,6 +8,7 @@ function updateExercises() {
     exerciseDropdown.innerHTML = ''; // Clear existing options
 
     var exercises = {
+        'initial': ['Initial Assessment'],
         'flexion': ['RFIL', 'RFIL with overpressure', 'RFIsitting', 'RFIstanding', 'RFIstanding with overpressure'],
         'extension': ['Prone Lying', 'Prone on Elbows', 'REIL', 'REIL with Overpressure', 'REIL w/ clinician overpressure', 'Extension Mobilization'],
         'lateral': ['Side glide in standing', 'Shift Correct'],
@@ -22,5 +23,12 @@ function updateExercises() {
             option.text = exercise;
             exerciseDropdown.appendChild(option);
         });
+    } else {
+        // If no series is selected, just show the Initial Assessment
+        var option = document.createElement('option');
+        option.value = 'Initial Assessment';
+        option.text = 'Initial Assessment';
+        exerciseDropdown.appendChild(option);
     }
 }
+
