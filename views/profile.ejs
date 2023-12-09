@@ -5,23 +5,29 @@
     <div class="col-6">
       <div class="mt-5">
           <form action="/measurement/createMeasurement"  method="POST">
-                         
-<!-- ropdown for selecting the exercise series -->
+   <!-- Container for all form elements except the table -->
+      <div class="form-elements-container">
+    <!-- Container for select dropdowns -->   
+            <div class="selects-container">
               <select id="exerciseSeries" name="exerciseSeries" onchange="updateExercises()">
-                <option value="" selected disabled>Select Series</option>
+                <option value="" selected disabled>Select ISeries</option>
                 <option value="initial">Initial Assessment</option>
                 <option value="flexion">Flexion</option>
                 <option value="extension">Extension</option>
                 <option value="lateral">Lateral</option>
                 <option value="lateral-rotation">Lateral-Rotation</option>
               </select>
-
+              <select id="specificExercise" name="exerciseGiven" required></select>
+            </div>
           
- <!--Dropdown for specific exercises, to be filled dynamically -->
-                  <select id="specificExercise" name="exerciseGiven" required></select>
+            <!-- Container for input fields -->
+            <div class="inputs-container">
               <input type="text" name="patient_Id" required placeholder="Enter Patient ID">
-              <input type="submit" value="Submit Data">
+              <input id="submit_btn"  type="submit" value="Submit Data">
+            </div>
+      </div>
  <!--Objective Measurement Table --> 
+          <div class="table-container">
               <table>
                     <thead>
                         <tr>
@@ -73,6 +79,7 @@
                         </tr>
                     </tbody>
               </table>
+          </div>
             </form>
       </div>
     </div>
