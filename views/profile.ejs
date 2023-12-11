@@ -8,13 +8,26 @@
           <div class="mt-5">
             
             <form action="/measurement/createMeasurement"  method="POST">
+                           
+                <select name="exerciseGiven" required>
+                    <option value="" selected disabled>Exercise</option>
+                    <option value="initialAssessment">Initial Assessment</option>
+                    <option value="ProneLying">ProneLying</option>
+                    <option value="POE">POE</option>
+                    <option value="REIL">REIL</option>
+                    <option value="REIL_on_Blocks">REIL on Blocks</option>
+                    <option value="REIL_PT_OP">REIL PT OP</option>
+                    <option value="PA_mobs">PA mobs</option>
+                </select>
+                <input type="text" name="patient_Id" required placeholder="Enter Patient ID">
+                <input type="submit" value="Objective measurements">
                 <table>
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Major</th>
-                            <th>Moderate</th>
-                            <th>Minimum</th>
+                            <th>Maj</th>
+                            <th>Mod</th>
+                            <th>Min</th>
                             <th>Nil</th>
                             <th>Pain</th>
                             <th>Notes</th>
@@ -59,30 +72,16 @@
                         </tr>
                     </tbody>
                 </table>
-                
-                
-                
-                 <select name="exerciseGiven" required>
-                     <option value="" selected disabled>Exercise</option>
-                     <option value="initialAssessment">Initial Assessment</option>
-                     <option value="ProneLying">ProneLying</option>
-                     <option value="POE">POE</option>
-                     <option value="REIL">REIL</option>
-                     <option value="REIL_on_Blocks">REIL on Blocks</option>
-                     <option value="REIL_PT_OP">REIL PT OP</option>
-                     <option value="PA_mobs">PA mobs</option>
-                 </select>
-                 <input type="text" name="patient_Id" required placeholder="Enter Patient ID">
-                 <input type="submit" value="Objective measurements">
               </form>
           </div>
       </div>
      
-      <div>
+      <div class="footer user-details">
         <p><strong>User Name</strong>: <%= user.userName %></p>
         <p><strong>Email</strong>: <%= user.email %></p>
-        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+        <a href="/logout" class="btn btn-primary">Logout</a>
     </div>
+    
 
 
     </div>

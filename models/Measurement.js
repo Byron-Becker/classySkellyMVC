@@ -26,7 +26,12 @@ const MeasurementSchema = new mongoose.Schema({
     leftGlide: String
   },
   painRating: [Number],
-  notes: [String]
+  notes: [String],
+  exerciseOutcome: {
+    color: String, // 'green', 'yellow', or 'red'
+    message: String, // A message for the user about the outcome
+    improvedArea: String, // 'pain', 'rom', or 'both'
+  }
 });
 
 MeasurementSchema.statics.getInitialAssessment = function(patientId) {

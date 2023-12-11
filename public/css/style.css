@@ -1,0 +1,165 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f8f8f8;
+    color: #333;
+}
+
+/* Layout for header content */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    position: fixed; /* Fix to the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+.header * {
+    margin-right: 15px;
+}
+
+/* Main content styling */
+.content {
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    margin-top: 60px; /* Give space for the header */
+    padding-left: 20px;
+}
+
+/* Table styles */
+table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+/* Form element sizing */
+input[type="number"] {
+    width: 60px; /* Make the pain input smaller */
+}
+
+select, input[type="text"] {
+    width: auto; /* Only as wide as necessary */
+    margin-right: 10px; /* Space between elements */
+}
+
+/* Button style */
+button, input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Utility classes for spacing and alignment */
+.mr-10 {
+    margin-right: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header * {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    input[type="number"], select, input[type="text"], input[type="submit"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .form-line {
+        flex-direction: column;
+    }
+}
+
+/* Existing CSS */
+
+/* Additional styles for footer content */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+     border-top: 2px solid #ccc; /* Adjust color and size as needed */
+}
+
+.footer p {
+    margin-right: 20px; /* Adjust space between text and button */
+}
+
+/* Align the user details and logout button at the bottom left */
+.user-details {
+    display: flex; 
+    align-items: baseline; 
+
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    padding: 10px; 
+    width: 100%; 
+    background-color: #fff; 
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+/* Adjustments for logout button */
+.logout-button {
+    padding: 0px 10px; 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-decoration: none; 
+}
+
+/* Adjust the space below the user details and logout button */
+.user-details {
+    margin-bottom: 20px; /* Space below the user details */
+}
+
+
+
+
+
+
