@@ -60,12 +60,32 @@ module.exports = {
             patient_Id: req.body.patient_Id, 
             dateCreated: new Date(),
             exerciseGiven: req.body.exerciseGiven,
-            // rom: {
-            //     flexion: [req.body.rom_flexion_major, req.body.rom_flexion_moderate, req.body.rom_flexion_minimum, req.body.rom_flexion_nil],
-            //     extension: [req.body.rom_extension_major, req.body.rom_extension_moderate, req.body.rom_extension_minimum, req.body.rom_extension_nil],
-            //     rightGlide: [req.body.rom_rightglide_major, req.body.rom_rightglide_moderate, req.body.rom_rightglide_minimum, req.body.rom_rightglide_nil],
-            //     leftGlide: [req.body.rom_leftglide_major, req.body.rom_leftglide_moderate, req.body.rom_leftglide_minimum, req.body.rom_leftglide_nil]
-            // },
+            rom: {
+              flexion: [
+                  req.body.rom_flexion_major === 'on',
+                  req.body.rom_flexion_moderate === 'on',
+                  req.body.rom_flexion_minimum === 'on',
+                  req.body.rom_flexion_nil === 'on'
+              ],
+              extension: [
+                  req.body.rom_extension_major === 'on',
+                  req.body.rom_extension_moderate === 'on',
+                  req.body.rom_extension_minimum === 'on',
+                  req.body.rom_extension_nil === 'on'
+              ],
+              rightGlide: [
+                  req.body.rom_rightglide_major === 'on',
+                  req.body.rom_rightglide_moderate === 'on',
+                  req.body.rom_rightglide_minimum === 'on',
+                  req.body.rom_rightglide_nil === 'on'
+              ],
+              leftGlide: [
+                  req.body.rom_leftglide_major === 'on',
+                  req.body.rom_leftglide_moderate === 'on',
+                  req.body.rom_leftglide_minimum === 'on',
+                  req.body.rom_leftglide_nil === 'on'
+              ]
+            },
             painRating: req.body.rating, // Array of pain ratings
             notes: req.body.notes // Array of notes
         });

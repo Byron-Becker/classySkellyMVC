@@ -19,12 +19,12 @@ const MeasurementSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // rom: {
-  //   flexion: [Boolean],
-  //   extension: [Boolean],
-  //   rightGlide: [Boolean],
-  //   leftGlide: [Boolean]
-  // },
+  rom: {
+    flexion: [Boolean],
+    extension: [Boolean],
+    rightGlide: [Boolean],
+    leftGlide: [Boolean]
+  },
   painRating: [Number],
   notes: [String]
 });
