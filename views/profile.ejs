@@ -2,50 +2,83 @@
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
+
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
 
+
           <div class="mt-5">
             <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-              
-            </form>
+            <form action="/measurement/createMeasurement"  method="POST">
+                 <table>
+                     <thead>
+                         <tr>
+                             <th></th>
+                             <th>Major</th>
+                             <th>Moderate</th>
+                             <th>Minimum</th>
+                             <th>Nil</th>
+                             <th>Pain</th>
+                             <th>Notes</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td>Flexion</td>
+                             <td><input type="checkbox" name="rom_flexion_major"></td>
+                             <td><input type="checkbox" name="rom_flexion_moderate"></td>
+                             <td><input type="checkbox" name="rom_flexion_minimum"></td>
+                             <td><input type="checkbox" name="rom_flexion_nil"></td>
+                             <td><input type="number" name="rating[]" min="0" max="10" step="1" placeholder="0"></td>
+                             <td><textarea name="notes[]"></textarea></td>
+                         </tr>
+                         <tr>
+                             <td>Extension</td>
+                             <td><input type="checkbox" name="rom_extension_major"></td>
+                             <td><input type="checkbox" name="rom_extension_moderate"></td>
+                             <td><input type="checkbox" name="rom_extension_minimum"></td>
+                             <td><input type="checkbox" name="rom_extension_nil"></td>
+                             <td><input type="number" name="rating[]" min="0" max="10" step="1" placeholder="0"></td>
+                             <td><textarea name="notes[]"></textarea></td>
+                         </tr>
+                         <tr>
+                             <td>Right Side Glide</td>
+                             <td><input type="checkbox" name="rom_rightglide_major"></td>
+                             <td><input type="checkbox" name="rom_rightglide_moderate"></td>
+                             <td><input type="checkbox" name="rom_rightglide_minimum"></td>
+                             <td><input type="checkbox" name="rom_rightglide_nil"></td>
+                             <td><input type="number" name="rating[]" min="0" max="10" step="1" placeholder="0"></td>
+                             <td><textarea name="notes[]"></textarea></td>
+                         </tr>
+                         <tr>
+                             <td>Left Side Glide</td>
+                             <td><input type="checkbox" name="rom_leftglide_major"></td>
+                             <td><input type="checkbox" name="rom_leftglide_moderate"></td>
+                             <td><input type="checkbox" name="rom_leftglide_minimum"></td>
+                             <td><input type="checkbox" name="rom_leftglide_nil"></td>
+                             <td><input type="number" name="rating[]" min="0" max="10" step="1" placeholder="0"></td>
+                             <td><textarea name="notes[]"></textarea></td>
+                         </tr>
+                     </tbody>
+                 </table>
+                 <select name="exerciseGiven" required>
+                     <option value="" selected disabled>Exercise</option>
+                     <option value="ProneLying">ProneLying</option>
+                     <option value="POE">POE</option>
+                     <option value="REIL">REIL</option>
+                     <option value="REIL_on_Blocks">REIL on Blocks</option>
+                     <option value="REIL_PT_OP">REIL PT OP</option>
+                     <option value="PA_mobs">PA mobs</option>
+                 </select>
+                 <input type="text" name="patient_Id" required placeholder="Enter Patient ID">
+                 <input type="submit" value="Objective measurements">
+              </form>
           </div>
       </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+     
     </div>
   </div>
 </div>

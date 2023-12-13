@@ -7,7 +7,7 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 //Post Routes - simplified for now
 router.get("/:id", ensureAuth, measurementsController.getMeasurement);
 
-router.post("/createPost", upload.single("file"), measurementsController.createMeasurement);
+router.post("/createMeasurement", measurementsController.createMeasurement);
 
 router.put("/likePost/:id", measurementsController.likePost);
 

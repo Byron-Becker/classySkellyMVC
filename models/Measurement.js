@@ -1,34 +1,32 @@
 const mongoose = require("mongoose");
 
 const MeasurementSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  caption: {
-    type: String,
-    required: true,
-  },
-  likes: {
-    type: Number,
-    required: true,
-  },
-  user: {
+  clinician_Id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    required: true,
+    ref: 'User' // Replace 'User' with your Clinician model
   },
-  createdAt: {
+  patient_Id: {
+    type: String,
+    required: true
+  },
+  dateCreated: {
     type: Date,
-    default: Date.now,
+    required: true,
+    default: Date.now
   },
+  exerciseGiven: {
+    type: String,
+    required: true
+  },
+  // rom: {
+  //   flexion: [Boolean],
+  //   extension: [Boolean],
+  //   rightGlide: [Boolean],
+  //   leftGlide: [Boolean]
+  // },
+  painRating: [Number],
+  notes: [String]
 });
 
 module.exports = mongoose.model("Measurement", MeasurementSchema);
