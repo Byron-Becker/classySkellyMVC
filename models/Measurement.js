@@ -29,4 +29,12 @@ const MeasurementSchema = new mongoose.Schema({
   notes: [String]
 });
 
+MeasurementSchema.statics.getInitialAssessment = function(patientId) {
+  return this.findOne({ 
+      patient_Id: patientId, 
+      exerciseGiven: 'initial assessment' 
+  }).sort({ dateCreated: 1 });
+};
+
+
 module.exports = mongoose.model("Measurement", MeasurementSchema);
