@@ -20,10 +20,10 @@ const MeasurementSchema = new mongoose.Schema({
     required: true
   },
   rom: {
-    flexion: [Boolean],
-    extension: [Boolean],
-    rightGlide: [Boolean],
-    leftGlide: [Boolean]
+    flexion: String,
+    extension: String,
+    rightGlide: String,
+    leftGlide: String
   },
   painRating: [Number],
   notes: [String]
@@ -35,6 +35,5 @@ MeasurementSchema.statics.getInitialAssessment = function(patientId) {
       exerciseGiven: 'initialAssessment' 
   }).sort({ dateCreated: 1 });
 };
-
 
 module.exports = mongoose.model("Measurement", MeasurementSchema);

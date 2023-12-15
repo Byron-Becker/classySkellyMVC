@@ -15,71 +15,59 @@ module.exports = {
 
   createMeasurement: async (req, res) => {
     try {
-        // Create and store the new measurement
-        const newMeasurement = await Measurement.create({
-            clinician_Id: req.user.id, 
-            patient_Id: req.body.patient_Id, 
-            dateCreated: new Date(),
-            exerciseGiven: req.body.exerciseGiven,
-            rom: {
-                flexion: [
-                    req.body.rom_flexion_major === 'on',
-                    req.body.rom_flexion_moderate === 'on',
-                    req.body.rom_flexion_minimum === 'on',
-                    req.body.rom_flexion_nil === 'on'
-                ],
-                extension: [
-                    req.body.rom_extension_major === 'on',
-                    req.body.rom_extension_moderate === 'on',
-                    req.body.rom_extension_minimum === 'on',
-                    req.body.rom_extension_nil === 'on'
-                ],
-                rightGlide: [
-                    req.body.rom_rightglide_major === 'on',
-                    req.body.rom_rightglide_moderate === 'on',
-                    req.body.rom_rightglide_minimum === 'on',
-                    req.body.rom_rightglide_nil === 'on'
-                ],
-                leftGlide: [
-                    req.body.rom_leftglide_major === 'on',
-                    req.body.rom_leftglide_moderate === 'on',
-                    req.body.rom_leftglide_minimum === 'on',
-                    req.body.rom_leftglide_nil === 'on'
-                ]
-            },
-            painRating: req.body.rating, // Array of pain ratings
-            notes: req.body.notes // Array of notes
-        });
+      // Extract and format ROM data from the request
+      const romData = {
+        flexion: req.body.rom_flexion,
+        extension: req.body.rom_extension,
+        rightGlide: req.body.rom_rightglide,
+        leftGlide: req.body.rom_leftglide
+      };
 
-        console.log("Measurement has been added!");
+      // Create and store the new measurement
+      const newMeasurement = await Measurement.create({
+        clinician_Id: req.user.id, 
+        patient_Id: req.body.patient_Id, 
+        dateCreated: new Date(),
+        exerciseGiven: req.body.exerciseGiven,
+        rom: romData,
+        painRating: req.body.rating, // Array of pain ratings
+        notes: req.body.notes // Array of notes
+      });
 
-        // Compare with the previous assessment if not the initial session
-        // Compare with the previous assessment if not the initial session
-        if (req.body.exerciseGiven !== 'initialAssessment') {
-          const previousAssessment = await Measurement.findOne({ 
-              patient_Id: req.body.patient_Id,
-              _id: { $ne: newMeasurement._id } // Exclude the current assessment
-          }).sort({ dateCreated: -1 });
+      console.log("Measurement has been added!");
 
-          const previousRatings = previousAssessment ? previousAssessment.painRating : [];
+      // Compare with the previous assessment if not the initial session
+      if (req.body.exerciseGiven !== 'initialAssessment') {
+        const previousAssessment = await Measurement.findOne({ 
+            patient_Id: req.body.patient_Id,
+            _id: { $ne: newMeasurement._id } // Exclude the current assessment
+        }).sort({ dateCreated: -1 });
 
-          // Use utility function for processing
-          const outcome = await measurementProcessor.comparePainRatings(
-              req.body.rating, 
-              req.body.patient_Id, 
-              req.body.exerciseGiven, 
-              newMeasurement._id
+        if (previousAssessment) {
+          // Use utility function for processing ROM
+          const romOutcome = measurementProcessor.compareROMRatings(
+              romData, 
+              previousAssessment.rom
           );
 
-          console.log("Outcome of pain rating comparison:", outcome);
+          console.log("Outcome of ROM comparison:", romOutcome);
+
+          // You can also use utility function for pain ratings
+          const painOutcome = measurementProcessor.comparePainRatings(
+              req.body.rating, 
+              previousAssessment.painRating
+          );
+
+          console.log("Outcome of pain rating comparison:", painOutcome);
+        }
       }
 
-        res.redirect("/profile"); // Adjust the redirect as needed
+      res.redirect("/profile"); // Adjust the redirect as needed
     } catch (err) {
-        console.log(err);
-        res.status(500).send("Server Error");
+      console.log(err);
+      res.status(500).send("Server Error");
     }
-},
+  },
 
 createOrUpdateMeasurement: async (req, res) => {
   try {
