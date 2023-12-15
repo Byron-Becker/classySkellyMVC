@@ -32,7 +32,7 @@ const MeasurementSchema = new mongoose.Schema({
 MeasurementSchema.statics.getInitialAssessment = function(patientId) {
   return this.findOne({ 
       patient_Id: patientId, 
-      exerciseGiven: 'initial assessment' 
+      exerciseGiven: 'initialAssessment' 
   }).sort({ dateCreated: 1 });
 };
 
