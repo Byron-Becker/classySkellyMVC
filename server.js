@@ -11,6 +11,7 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const measurementRoutes = require("./routes/measurements");
 
+
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -61,3 +62,8 @@ app.use("/measurement", measurementRoutes);
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
 });
+
+// In your routes file or controllers file
+
+
+

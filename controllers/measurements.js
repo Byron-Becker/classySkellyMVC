@@ -1,9 +1,17 @@
 const cloudinary = require("../middleware/cloudinary");
 const Measurement = require("../models/Measurement");
+const measurementProcessor = require('../utilities/measurementProcessor');
 
 module.exports = {
 
-
+  getProfile: async (req, res) => {
+    try {
+      const posts = await Measurement.find({ user: req.user.id });
+      res.render("profile.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
 
   createMeasurement: async (req, res) => {
     try {
@@ -42,6 +50,7 @@ module.exports = {
             painRating: req.body.rating, // Array of pain ratings
             notes: req.body.notes // Array of notes
         });
+
         console.log("Measurement has been added!");
         res.redirect("/profile"); // Adjust the redirect as needed
     } catch (err) {
@@ -50,7 +59,27 @@ module.exports = {
     }
 },
 
-  
+createOrUpdateMeasurement: async (req, res) => {
+  try {
+      // ... get data from request ...
+
+      // Use utility function for processing
+      const outcome = await measurementProcessor.comparePainRatings(currentRatings, patientId);
+
+      // ... rest of your controller logic ...
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
+},
+
+
+
+
+
+
+
+
 
 
 
