@@ -13,57 +13,60 @@
           <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/measurement/createMeasurement"  method="POST">
-                 <table>
-                     <thead>
-                         <tr>
-                             <th></th>
-                             <th>Major</th>
-                             <th>Moderate</th>
-                             <th>Minimum</th>
-                             <th>Nil</th>
-                             <th>Pain</th>
-                             <th>Notes</th>
-                         </tr>
-                     </thead>
-                     <tbody>
-                         <tr>
-                             <td>Flexion</td>
-                             <td><input type="checkbox" name="rom_flexion_major"></td>
-                             <td><input type="checkbox" name="rom_flexion_moderate"></td>
-                             <td><input type="checkbox" name="rom_flexion_minimum"></td>
-                             <td><input type="checkbox" name="rom_flexion_nil"></td>
-                             <td><input type="number" name="rating[]" min="0" max="10" step="1" placeholder="0"></td>
-                             <td><textarea name="notes[]"></textarea></td>
-                         </tr>
-                         <tr>
-                             <td>Extension</td>
-                             <td><input type="checkbox" name="rom_extension_major"></td>
-                             <td><input type="checkbox" name="rom_extension_moderate"></td>
-                             <td><input type="checkbox" name="rom_extension_minimum"></td>
-                             <td><input type="checkbox" name="rom_extension_nil"></td>
-                             <td><input type="number" name="rating[]" min="0" max="10" step="1" placeholder="0"></td>
-                             <td><textarea name="notes[]"></textarea></td>
-                         </tr>
-                         <tr>
-                             <td>Right Side Glide</td>
-                             <td><input type="checkbox" name="rom_rightglide_major"></td>
-                             <td><input type="checkbox" name="rom_rightglide_moderate"></td>
-                             <td><input type="checkbox" name="rom_rightglide_minimum"></td>
-                             <td><input type="checkbox" name="rom_rightglide_nil"></td>
-                             <td><input type="number" name="rating[]" min="0" max="10" step="1" placeholder="0"></td>
-                             <td><textarea name="notes[]"></textarea></td>
-                         </tr>
-                         <tr>
-                             <td>Left Side Glide</td>
-                             <td><input type="checkbox" name="rom_leftglide_major"></td>
-                             <td><input type="checkbox" name="rom_leftglide_moderate"></td>
-                             <td><input type="checkbox" name="rom_leftglide_minimum"></td>
-                             <td><input type="checkbox" name="rom_leftglide_nil"></td>
-                             <td><input type="number" name="rating[]" min="0" max="10" step="1" placeholder="0"></td>
-                             <td><textarea name="notes[]"></textarea></td>
-                         </tr>
-                     </tbody>
-                 </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Major</th>
+                            <th>Moderate</th>
+                            <th>Minimum</th>
+                            <th>Nil</th>
+                            <th>Pain</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Flexion</td>
+                            <td><input type="radio" name="rom_flexion" value="major"></td>
+                            <td><input type="radio" name="rom_flexion" value="moderate"></td>
+                            <td><input type="radio" name="rom_flexion" value="minimum"></td>
+                            <td><input type="radio" name="rom_flexion" value="nil" checked></td>
+                            <td><input type="number" name="rating[]" value="0" min="0" max="10" step="1" placeholder="0" onclick="this.select();"></td>
+                            <td><textarea name="notes[]"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Extension</td>
+                            <td><input type="radio" name="rom_extension" value="major"></td>
+                            <td><input type="radio" name="rom_extension" value="moderate"></td>
+                            <td><input type="radio" name="rom_extension" value="minimum"></td>
+                            <td><input type="radio" name="rom_extension" value="nil" checked></td>
+                            <td><input type="number" name="rating[]" value="0" min="0" max="10" step="1" placeholder="0" onclick="this.select();"></td>
+                            <td><textarea name="notes[]"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Right Side Glide</td>
+                            <td><input type="radio" name="rom_rightglide" value="major"></td>
+                            <td><input type="radio" name="rom_rightglide" value="moderate"></td>
+                            <td><input type="radio" name="rom_rightglide" value="minimum"></td>
+                            <td><input type="radio" name="rom_rightglide" value="nil" checked></td>
+                            <td><input type="number" name="rating[]" value="0" min="0" max="10" step="1" placeholder="0" onclick="this.select();"></td>
+                            <td><textarea name="notes[]"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Left Side Glide</td>
+                            <td><input type="radio" name="rom_leftglide" value="major"></td>
+                            <td><input type="radio" name="rom_leftglide" value="moderate"></td>
+                            <td><input type="radio" name="rom_leftglide" value="minimum"></td>
+                            <td><input type="radio" name="rom_leftglide" value="nil" checked></td>
+                            <td><input type="number" name="rating[]" value="0" min="0" max="10" step="1" placeholder="0" onclick="this.select();"></td>
+                            <td><textarea name="notes[]"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+                
                  <select name="exerciseGiven" required>
                      <option value="" selected disabled>Exercise</option>
                      <option value="initialAssessment">Initial Assessment</option>

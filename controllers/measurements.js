@@ -54,23 +54,25 @@ module.exports = {
         console.log("Measurement has been added!");
 
         // Compare with the previous assessment if not the initial session
+        // Compare with the previous assessment if not the initial session
         if (req.body.exerciseGiven !== 'initialAssessment') {
-            const patientId = req.body.patient_Id;
-            const currentRatings = req.body.rating; // Array of current pain ratings
-            const currentExercise = req.body.exerciseGiven;
+          const previousAssessment = await Measurement.findOne({ 
+              patient_Id: req.body.patient_Id,
+              _id: { $ne: newMeasurement._id } // Exclude the current assessment
+          }).sort({ dateCreated: -1 });
 
-            // Fetch the most recent previous assessment
-            const previousAssessment = await Measurement.find({ patient_Id: patientId })
-                                                        .sort({ dateCreated: -1 })
-                                                        .limit(1);
+          const previousRatings = previousAssessment ? previousAssessment.painRating : [];
 
-            const previousRatings = previousAssessment.length > 0 ? previousAssessment[0].painRating : [];
+          // Use utility function for processing
+          const outcome = await measurementProcessor.comparePainRatings(
+              req.body.rating, 
+              req.body.patient_Id, 
+              req.body.exerciseGiven, 
+              newMeasurement._id
+          );
 
-            // Use utility function for processing
-            const outcome = await measurementProcessor.comparePainRatings(currentRatings, patientId, currentExercise);
-
-            console.log("Outcome of pain rating comparison:", outcome);
-        }
+          console.log("Outcome of pain rating comparison:", outcome);
+      }
 
         res.redirect("/profile"); // Adjust the redirect as needed
     } catch (err) {
