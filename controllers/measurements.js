@@ -15,7 +15,7 @@ module.exports = {
 
   createMeasurement: async (req, res) => {
     try {
-      console.log(req.body)
+      
         await Measurement.create({
             clinician_Id: req.user.id, 
             patient_Id: req.body.patient_Id, 
@@ -61,12 +61,27 @@ module.exports = {
 
 createOrUpdateMeasurement: async (req, res) => {
   try {
-      // ... get data from request ...
+      const patientId = req.body.patient_Id;
+      const currentRatings = req.body.rating; // Array of current pain ratings
+      const currentExercise = req.body.exerciseGiven;
+
+      // Fetch the most recent previous assessment
+      const previousAssessment = await Measurement.find({ patient_Id: patientId })
+                                                  .sort({ dateCreated: -1 })
+                                                  .limit(1);
+
+      const previousRatings = previousAssessment.length > 0 ? previousAssessment[0].painRating : [];
 
       // Use utility function for processing
-      const outcome = await measurementProcessor.comparePainRatings(currentRatings, patientId);
+      const outcome = await measurementProcessor.comparePainRatings(currentRatings, patientId, currentExercise);
 
-      // ... rest of your controller logic ...
+      // Save the current assessment
+      await Measurement.create({
+          // ... data from the request ...
+      });
+
+      // Respond with the outcome
+      res.status(200).json({ message: outcome });
   } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');

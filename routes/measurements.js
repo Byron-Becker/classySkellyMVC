@@ -11,6 +11,8 @@ router.get("/:id", ensureAuth, measurementsController.getMeasurement);
 
 router.post("/createMeasurement", measurementsController.createMeasurement);
 
+router.post("/createOrUpdateMeasurement", ensureAuth, measurementsController.createOrUpdateMeasurement);
+
 router.get('/test-initial-assessment/:patientId', async (req, res) => {
   try {
     const patientId = req.params.patientId;
