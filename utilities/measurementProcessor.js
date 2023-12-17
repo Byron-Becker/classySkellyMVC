@@ -88,8 +88,25 @@ async function comparePainAndRomRatings(currentAssessment, patientId) {
     }
 }
 
+function combineOutcomes(romOutcome, painOutcome, currentExercise) {
+    // Logic to determine the final outcome based on romOutcome and painOutcome
+    let color = 'yellow'; // Default to yellow light
+    let message = 'No significant change.';
+  
+    if (romOutcome === 'Green Light' || painOutcome === 'Green Light') {
+      color = 'green';
+      message = `Greenlight: you should give the patient the current exercise of ${currentExercise}`;
+    } else if (romOutcome === 'Red Light' || painOutcome === 'Red Light') {
+      color = 'red';
+      message = 'Redlight: Reassess and consider an alternative approach.';
+    }
+  
+    return { color, message };
+  }
+
 module.exports = {
     comparePainRatings,
     compareROMRatings,
-    comparePainAndRomRatings
+    comparePainAndRomRatings,
+    combineOutcomes
 };

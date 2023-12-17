@@ -7,9 +7,14 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Measurement.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      res.render("profile.ejs", {
+        posts: posts,
+        user: req.user,
+        outcome: {} // Include an empty outcome object
+      });
     } catch (err) {
       console.log(err);
+      res.render("error.ejs", { error: err }); // Render an error page or handle the error appropriately
     }
   },
 
@@ -34,7 +39,10 @@ module.exports = {
         notes: req.body.notes // Array of notes
       });
 
-      console.log("Measurement has been added!");
+      let outcome = {
+        color: 'green',
+        message: 'Initial assessment: proceed with the current exercise plan.'
+      };
 
       // Compare with the previous assessment if not the initial session
       if (req.body.exerciseGiven !== 'initialAssessment') {
@@ -45,24 +53,24 @@ module.exports = {
 
         if (previousAssessment) {
           // Use utility function for processing ROM
-          const romOutcome = measurementProcessor.compareROMRatings(
-              romData, 
-              previousAssessment.rom
-          );
+          const romOutcome = measurementProcessor.compareROMRatings(romData, previousAssessment.rom);
 
-          console.log("Outcome of ROM comparison:", romOutcome);
+          // Use utility function for pain ratings
+          const painOutcome = measurementProcessor.comparePainRatings(req.body.rating, previousAssessment.painRating);
 
-          // You can also use utility function for pain ratings
-          const painOutcome = measurementProcessor.comparePainRatings(
-              req.body.rating, 
-              previousAssessment.painRating
-          );
-
-          console.log("Outcome of pain rating comparison:", painOutcome);
+          // Combine the outcomes
+          outcome = measurementProcessor.combineOutcomes(romOutcome, painOutcome, req.body.exerciseGiven);
         }
       }
 
-      res.redirect("/profile"); // Adjust the redirect as needed
+      // Render the profile with the outcome to display it on the page
+      const posts = await Measurement.find({ user: req.user.id });
+      res.render("profile.ejs", {
+        posts: posts,
+        user: req.user,
+        outcome: outcome // Pass the outcome to the view
+      });
+
     } catch (err) {
       console.log(err);
       res.status(500).send("Server Error");

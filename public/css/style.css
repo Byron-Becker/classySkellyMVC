@@ -160,6 +160,27 @@ button, input[type="submit"] {
 
 
 
-
+.outcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px; /* Adjust as needed */
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background */
+  }
+  
+  .outcome-container img {
+    width: 50px; /* Adjust as needed */
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .outcome-container h3 {
+    text-align: center;
+    color: #333;
+  }
+  
 
 

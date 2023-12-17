@@ -9,18 +9,23 @@
             
             <form action="/measurement/createMeasurement"  method="POST">
                            
-                <select name="exerciseGiven" required>
-                    <option value="" selected disabled>Exercise</option>
-                    <option value="initialAssessment">Initial Assessment</option>
-                    <option value="ProneLying">ProneLying</option>
-                    <option value="POE">POE</option>
-                    <option value="REIL">REIL</option>
-                    <option value="REIL_on_Blocks">REIL on Blocks</option>
-                    <option value="REIL_PT_OP">REIL PT OP</option>
-                    <option value="PA_mobs">PA mobs</option>
-                </select>
+<!-- Dropdown for selecting the exercise series -->
+                    <select id="exerciseSeries" name="exerciseSeries" onchange="updateExercises()">
+                        <option value="" selected disabled>Select Series</option>
+                        <option value="flexion">Flexion</option>
+                        <option value="extension">Extension</option>
+                        <option value="lateral">Lateral</option>
+                        <option value="lateral-rotation">Lateral-Rotation</option>
+                    </select>
+            
+ <!-- Dropdown for specific exercises, to be filled dynamically -->
+                    <select id="specificExercise" name="exerciseGiven" required></select>
+
+
                 <input type="text" name="patient_Id" required placeholder="Enter Patient ID">
                 <input type="submit" value="Objective measurements">
+
+ <!-- Objective Measurement Table --> 
                 <table>
                     <thead>
                         <tr>
@@ -73,18 +78,34 @@
                     </tbody>
                 </table>
               </form>
-          </div>
+        </div>
       </div>
      
+<!-- Outcome container - right of Measurement Table -->
+      <div class="col-6">
+        <% if (outcome) { %>
+          <div class="outcome-container">
+            <img src="/images/<%= outcome.color %>Light.png" alt="<%= outcome.color %> traffic light">
+            <h3><%= outcome.message %></h3>
+          </div>
+        <% } %>
+      </div>
+      </div>
+    
+<!-- login email/user and logout button -->
       <div class="footer user-details">
         <p><strong>User Name</strong>: <%= user.userName %></p>
         <p><strong>Email</strong>: <%= user.email %></p>
         <a href="/logout" class="btn btn-primary">Logout</a>
     </div>
-    
-
-
+        
     </div>
   </div>
 </div>
+
+
+
+
+<script src="/scripts/scripts.js"></script>
+
 <%- include('partials/footer') -%>
