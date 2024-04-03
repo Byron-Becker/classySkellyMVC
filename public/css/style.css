@@ -114,9 +114,7 @@ button, input[type="submit"] {
     display: flex;
     align-items: center;
     justify-content: start;
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    margin-top: 100px;
     width: 100%;
     background-color: #fff;
     padding: 10px;
@@ -132,10 +130,6 @@ button, input[type="submit"] {
 .user-details {
     display: flex; 
     align-items: baseline; 
-
-    position: fixed; 
-    bottom: 0; 
-    left: 0; 
     padding: 10px; 
     width: 100%; 
     background-color: #fff; 
@@ -219,6 +213,7 @@ button, input[type="submit"] {
         margin-right: 0;
         margin-bottom: 20px; /* Space between the containers on smaller screens */
     }
+    
 }
 
 #submit_btn {
